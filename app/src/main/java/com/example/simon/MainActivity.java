@@ -17,8 +17,10 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnjn;
+
     ArrayList <Integer> pattern;
     ArrayList <Integer> uPattern;
+
     Random randomValue;
 
     Boolean perder;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textComputer;
     TextView textUser;
+
+    Button timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +63,83 @@ public class MainActivity extends AppCompatActivity {
 
         randomValue = new Random();
 
+        timer = (Button) findViewById(R.id.timer);
+
         enableButtons();
     }
 
     public void nextTurn (){
         computerPattern();
+    }
+
+    public void  imprimeBoton(final int x) {
+        new CountDownTimer(1500, 500) {
+            public void onTick(long millisUntilFinished) {
+                textUser.setText("seconds remaining: " + millisUntilFinished / 100);
+                switch (x) {
+                    case 1:
+                        btn1.setText("X");
+                        break;
+                    case 2:
+                        btn2.setText("X");
+                        break;
+                    case 3:
+                        btn3.setText("X");
+                        break;
+                    case 4:
+                        btn4.setText("X");
+                        break;
+                    case 5:
+                        btn5.setText("X");
+                        break;
+                    case 6:
+                        btn6.setText("X");
+                        break;
+                    case 7:
+                        btn7.setText("X");
+                        break;
+                    case 8:
+                        btn8.setText("X");
+                        break;
+                    case 9:
+                        btn9.setText("X");
+                        break;
+                }
+            }
+
+            public void onFinish() {
+                textUser.setText("done!");
+                switch (x) {
+                    case 1:
+                        btn1.setText("");
+                        break;
+                    case 2:
+                        btn2.setText("");
+                        break;
+                    case 3:
+                        btn3.setText("");
+                        break;
+                    case 4:
+                        btn4.setText("");
+                        break;
+                    case 5:
+                        btn5.setText("");
+                        break;
+                    case 6:
+                        btn6.setText("");
+                        break;
+                    case 7:
+                        btn7.setText("");
+                        break;
+                    case 8:
+                        btn8.setText("");
+                        break;
+                    case 9:
+                        btn9.setText("");
+                        break;
+                }
+            }
+        }.start();
     }
 
     public void buttons(){
@@ -192,8 +268,9 @@ public class MainActivity extends AppCompatActivity {
         printingCounter = 0;
         //cText = "";
         while (printingCounter < pattern.size()){
-            flashingButtons();
+            imprimeBoton(pattern.get(printingCounter));
             //cText = cText + Integer.toString(pattern.get(counter)) + ", ";
+            printingCounter = printingCounter + 1;
         }
 
 
@@ -237,18 +314,28 @@ public class MainActivity extends AppCompatActivity {
 
     //try { Thread.sleep(5000); }
     //catch (InterruptedException ex) { android.util.Log.d("YourApplicationName", ex.toString()); }
-    public void flashingButtons(){
+    /*public void flashingButtons(){
         if (!printing && printingCounter < pattern.size()){
-            new CountDownTimer(2000, 1000) {
+            new CountDownTimer(2000, 400) {
                 public void onTick(long millisUntilFinished) {
                     // millisUntilFinished    The amount of time until finished.
-                    printButton(pattern.get(printingCounter));
+                    //printButton(pattern.get(printingCounter));
+                    counter = 0;
+                    cText = "";
+                    while (counter < pattern.size()){
+                        cText = cText + Integer.toString(pattern.get(counter)) + ", ";
+                        counter = counter + 1;
+                    }
+                    textComputer.setText(cText);
                     printing = true;
                 }
                 public void onFinish() {
                     // When timer is finished
                     // Execute your code here
                     printingCounter = printingCounter + 1;
+                    textComputer.setText(Integer.toString(printingCounter));
+                    //resetButtons();
+                    printing = false;
                 }
             }.start();
         }
@@ -256,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
         //resetButtons();
         //}
         //enableButtons();
-    }
+    }*/
 
     public void resetButtons(){
         btn1.setText("");
