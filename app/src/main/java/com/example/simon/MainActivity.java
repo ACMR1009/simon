@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     public void  imprimeBoton(final int x) {
         new CountDownTimer(1500, 500) {
             public void onTick(long millisUntilFinished) {
-                textUser.setText("Botón" + x + ", seconds remaining: " + millisUntilFinished / 100);
+                textUser.setText("Button" + x + ", milliseconds remaining: " + millisUntilFinished);
                 //printingArray.set(y, true);
                 switch (x) {
                     case 1:

@@ -114,7 +114,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="96dp"
         android:layout_marginRight="96dp"
-        android:text="JUEGO NUEVO"
+        android:text="NEW GAME"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textUser" />
