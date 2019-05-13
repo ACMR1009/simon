@@ -20,13 +20,14 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList <Integer> pattern;
     ArrayList <Integer> uPattern;
+    //ArrayList <Boolean> printingArray;
 
     Random randomValue;
 
     Boolean perder;
-    Boolean printing;
+    Boolean working;
 
-    int counter;
+    //int counter;
     int uCounter;
     int printingCounter;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textComputer;
     TextView textUser;
 
-    Button timer;
+    //CountDownTimer timer1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
         randomValue = new Random();
 
-        timer = (Button) findViewById(R.id.timer);
-
         enableButtons();
     }
 
@@ -75,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
     public void  imprimeBoton(final int x) {
         new CountDownTimer(1500, 500) {
             public void onTick(long millisUntilFinished) {
-                textUser.setText("seconds remaining: " + millisUntilFinished / 100);
+                textUser.setText("Botón" + x + ", seconds remaining: " + millisUntilFinished / 100);
+                //printingArray.set(y, true);
                 switch (x) {
                     case 1:
                         btn1.setText("X");
@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
-
             public void onFinish() {
                 textUser.setText("done!");
                 switch (x) {
@@ -138,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
                         btn9.setText("");
                         break;
                 }
+                //printingArray.set(y, false);
+                working = false;
             }
         }.start();
     }
@@ -148,9 +149,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //resetButtons();
                 pattern = new ArrayList<Integer>();
+                //printingArray = new ArrayList<Boolean>();
+                working = false;
                 randomValue = new Random();
                 textComputer.setText("");
                 textUser.setText("");
+                //printingArray.add(false);
                 computerPattern();
             }
         });
@@ -235,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
             if (pattern.get(uCounter) == uPattern.get(uCounter)){
             }
             else {
-                textUser.setText("Perdiste");
+                textUser.setText("Perdiste. Tu puntaje fue: " + uPattern.size());
                 perder = true;
             }
             uCounter = uCounter + 1;
@@ -258,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
     public void computerPattern(){
         //disableButtons();
         pattern.add(randomValue.nextInt(9) + 1);
+        //printingArray.add(false);
         /**counter = 0;
         cText = "";
         while (counter < pattern.size()){
@@ -266,14 +271,14 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
         printingCounter = 0;
-        //cText = "";
+        //printingArray.set(printingCounter,false);
         while (printingCounter < pattern.size()){
-            imprimeBoton(pattern.get(printingCounter));
-            //cText = cText + Integer.toString(pattern.get(counter)) + ", ";
-            printingCounter = printingCounter + 1;
+            if (working == false){
+                //printingArray.set(printingCounter, true);
+                imprimeBoton(pattern.get(printingCounter));
+                printingCounter = printingCounter + 1;
+            }
         }
-
-
 
         textComputer.setText(cText);
         uPattern = new ArrayList<Integer>();
