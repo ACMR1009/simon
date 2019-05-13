@@ -20,9 +20,13 @@ public class MainActivity extends AppCompatActivity {
     ArrayList <Integer> pattern;
     ArrayList <Integer> uPattern;
     Random randomValue;
+
     Boolean perder;
+    Boolean printing;
+
     int counter;
     int uCounter;
+    int printingCounter;
 
     String uText;
     String cText;
@@ -178,34 +182,23 @@ public class MainActivity extends AppCompatActivity {
     public void computerPattern(){
         //disableButtons();
         pattern.add(randomValue.nextInt(9) + 1);
-        counter = 0;
+        /**counter = 0;
         cText = "";
         while (counter < pattern.size()){
             cText = cText + Integer.toString(pattern.get(counter)) + ", ";
             counter = counter + 1;
+        }*/
+
+        printingCounter = 0;
+        //cText = "";
+        while (printingCounter < pattern.size()){
+            flashingButtons();
+            //cText = cText + Integer.toString(pattern.get(counter)) + ", ";
         }
+
+
+
         textComputer.setText(cText);
-            /*printButton(pattern.get(counter));
-            //btn1.setText("1");
-            try { Thread.sleep(5000); }
-            catch (InterruptedException ex) { android.util.Log.d("YourApplicationName", ex.toString()); }
-            //btn1.setText("2");
-             new CountDownTimer(2000, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    // millisUntilFinished    The amount of time until finished.
-                }
-                public void onFinish() {
-                    // When timer is finished
-                    // Execute your code here
-
-                }
-            }.start();
-*/
-
-            //counter = counter+1;
-            //resetButtons();
-        //}
-        //enableButtons();
         uPattern = new ArrayList<Integer>();
         textUser.setText("");
     }
@@ -239,6 +232,30 @@ public class MainActivity extends AppCompatActivity {
             btn9.setText("X");
         }
 
+    }
+
+
+    //try { Thread.sleep(5000); }
+    //catch (InterruptedException ex) { android.util.Log.d("YourApplicationName", ex.toString()); }
+    public void flashingButtons(){
+        if (!printing && printingCounter < pattern.size()){
+            new CountDownTimer(2000, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    // millisUntilFinished    The amount of time until finished.
+                    printButton(pattern.get(printingCounter));
+                    printing = true;
+                }
+                public void onFinish() {
+                    // When timer is finished
+                    // Execute your code here
+                    printingCounter = printingCounter + 1;
+                }
+            }.start();
+        }
+        //counter = counter+1;
+        //resetButtons();
+        //}
+        //enableButtons();
     }
 
     public void resetButtons(){
